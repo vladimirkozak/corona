@@ -1,0 +1,275 @@
+.app--container {
+  width: 90%;
+  margin: 0 auto;
+  display: flex;
+  justify-content: center;
+  color: #fff;
+}
+
+.app--box {
+    width: 25%;
+    margin: 10px;
+    padding: 15px 25px;
+    background-color: #004042;
+    border-radius: 3px;
+
+    &-blue {
+      color: #21afdd;
+    }
+
+    &-green {
+      color: #10c469;
+    }
+
+    &-yellow {
+      color: #f9c851;
+    }
+
+    &-red {
+      color: #ff5b5b;
+    }
+
+    &--title {
+      font-weight: lighter;
+    }
+
+    &--number {
+      margin: 25px 0;
+      text-align: center;
+    }
+}
+
+.app--loading-sm {
+  width: 100%;
+  padding: 25px 0;
+  font-size: 1.6em;
+  display: flex;
+  justify-content: center;
+}
+
+.app--country {
+  width: 30%;
+  margin: 10px;
+  padding: 25px;
+  background-color: #004042;
+
+  &-form {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 30px;
+  }
+
+  &-search--input {
+    padding: 6px 15px;
+    border: none;
+    border-radius: 3px;
+    outline: none;
+    background-color:#fff;
+  }
+}
+
+.app--loading-md {
+  font-size: 2.7em;
+  width: 100%;
+  height: 372px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.app--map {
+  position: relative;
+  width: 70%;
+  margin: 10px;
+  padding: 25px;
+  background-color: #004042;
+}
+
+.app--LoadingMap {
+  width: 100%;
+  height: 94%;
+  position: absolute;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 2.7em;
+}
+
+.app--worldwide {
+  display: flex;
+  justify-content: space-between;
+  width: 70%;
+
+  &--button {
+    margin-right: 10px;
+    padding: 4px 10px;
+    border: none;
+    border-radius: 3px;
+    color: #fff;
+    outline: none;
+    cursor: pointer;
+
+    &-blue {
+      background-color: #21afdd;
+    }
+
+    &-green {
+      background-color: #10c469;
+    }
+
+    &-yellow {
+      background-color: #f9c851;
+    }
+
+    &-red {
+      background-color: #ff5b5b;
+    }
+  }
+}
+
+.infectedCountry {
+  margin: 20px 0;
+}
+
+.app--countrylink{
+  display: flex;
+  border-bottom: 1px solid grey;
+  text-decoration: none;
+}
+
+.app--staticCountry {
+  margin-left: 15px;
+  color: #fff;
+  
+
+  &--title {
+    font-size: 1.2em;
+  }
+}
+
+a {
+  text-decoration: none;
+}
+
+.app--scale {
+  background-color: #004042;
+  width: 70%;
+  margin: 10px;
+  padding: 25px;
+}
+
+.app--diagram {
+  background-color: #004042;
+  width: 30%;
+  margin: 10px;
+  padding: 25px;
+}
+
+.app--header-title {
+  padding-bottom: 50px;
+}
+
+.app--rates {
+  width: 70%;
+  margin: 10px;
+  padding: 25px;
+  border-radius: 3px;
+  background-color: #004042;
+}
+
+.app--timer {
+  width: 30%;
+  margin: 10px;
+  padding: 25px;
+  border-radius: 3px;
+  background-color: #004042;
+}
+
+.app--rates-box {
+  display: flex;
+}
+
+.app--rate {
+  margin: 0 15px;
+  padding: 35px 55px;
+  text-align: center;
+  border-radius: 3px;
+  color: red;
+  background-color: #003233;
+
+  &-blue {
+    color: #21afdd;
+  }
+
+  &-green {
+    color: #10c469;
+  }
+
+  &-yellow {
+    color: #f9c851;
+  }
+
+  &-red {
+    color: #ff5b5b;
+  }
+}
+
+.blue {
+  color: #21afdd;
+}
+
+.red {
+  color: #ff5b5b;
+}
+
+.app--loading-footer {
+  font-size: 1.6em;
+}
+
+.fa-spin {
+  -webkit-animation: fa-spin 2s infinite linear;
+          animation: fa-spin 2s infinite linear; }
+
+.fas {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1;
+}
+
+.fa-circle-notch:before {
+  content: "\f1ce";
+}
+
+@-webkit-keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); 
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg); 
+  }
+}
+
+@keyframes fa-spin {
+  0% {
+    -webkit-transform: rotate(0deg);
+            transform: rotate(0deg); 
+  }
+
+  100% {
+    -webkit-transform: rotate(360deg);
+            transform: rotate(360deg);
+  }
+}
+
+.fas {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900; 
+}
+

@@ -1,0 +1,164 @@
+<div class="app">
+  <div class="app--container">
+    <div class="app--box app--box-blue">
+      <h4 class="app--box--title">Infections</h4>
+      <div class="app--loading-sm" *ngIf="isLoading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div *ngIf="!isLoading">
+        <h2 class="app--box--number"> {{totalCases | number}} </h2>
+      </div>
+    </div>
+    <div class="app--box app--box-green">
+      <h4 class="app--box--title">Recoveries</h4>
+      <div class="app--loading-sm" *ngIf="isLoading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div *ngIf="!isLoading">
+        <h2 class="app--box--number"> {{totalRecoveries | number}} </h2>
+      </div>
+    </div>
+    <div class="app--box app--box-yellow">
+      <h4 class="app--box--title">Critical</h4>
+      <div class="app--loading-sm" *ngIf="isLoading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div *ngIf="!isLoading">
+        <h2 class="app--box--number"> {{totalCritical | number}} </h2>
+      </div>
+    </div>
+    <div class="app--box app--box-red">
+      <h4 class="app--box--title">Deaths</h4>
+      <div class="app--loading-sm" *ngIf="isLoading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div *ngIf="!isLoading">
+        <h2 class="app--box--number"> {{totalDeaths | number}} </h2>
+      </div>
+    </div>
+  </div>
+  <div class="app--container">
+    <div class="app--map">
+      <div class="app--worldwide">
+        <h4 class="header-title">Worldwide Infections</h4>
+        <div class="app--map-buttons">
+          <button type="button" class="app--worldwide--button app--worldwide--button-blue"
+            (click)="loadMap('cases')">Cases</button>
+          <button type="button" class="app--worldwide--button app--worldwide--button-green"
+            (click)="loadMap('recovered')">Recoveries</button>
+          <button type="button" class="app--worldwide--button app--worldwide--button-yellow"
+            (click)="loadMap('critical')">Critical</button>
+          <button type="button" class="app--worldwide--button app--worldwide--button-red"
+            (click)="loadMap('deaths')">Deaths</button>
+        </div>
+      </div>
+      <div class="app--LoadingMap" *ngIf="isLoadingMap">
+        <i class="fas fa-circle-notch fa-spin m-2"></i>
+      </div>
+      <div class="">
+        <div id="worldChart" style="width: 100%; height: 400px; overflow: hidden"></div>
+      </div>
+    </div>
+    <div class="app--country">
+      <h4 class="header-title">Affected Nations</h4>
+      <div class="app--country-form">
+        <div class="app--country-search">
+          <input type="text" #search (keyup)="searchCountries(search.value)" class="app--country-search--input"
+            placeholder="Search Countries...">
+        </div>
+        <div class="app--country-search">
+          <select class="app--country-search--input" #sortBy (change)="sortCountries(sortBy.value,search.value)">
+            <option selected="" disabled>Sort By</option>
+            <option value="cases">Total Cases</option>
+            <option value="todayCases">Today Cases</option>
+            <option value="deaths">Total Deaths</option>
+            <option value="todayDeaths">Today Deaths</option>
+            <option value="recovered">Total Recoveries</option>
+          </select>
+        </div>
+      </div>
+      <div class="app--loading-md" *ngIf="isLoadingCountries">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div class="infectedCountries" *ngIf="!isLoadingCountries">
+        <perfect-scrollbar #perfectscrollbar style="height:372px;">
+          <div class="infectedCountry" *ngFor="let country of countries" [title]="hover">
+            <a [routerLink]="[ '/country', country.country.toLowerCase() ]">
+              <div class="app--countrylink">
+                <div class="app--infectedCountryFlag">
+                  <img *ngIf="countryCodes[country.country] else unknown" style="height: 30px;
+                          width: 40px;" src="assets/flags/{{countryCodes[country.country].toLowerCase()}}.svg"
+                    alt="{{country.country}}">
+                  <ng-template #unknown>
+                    <img src="assets/flags/unknown.svg" alt="{{country.country}}" style="height: 30px;  width: 40px;">
+                  </ng-template>
+                </div>
+                <div class="app--staticCountry">
+                  <h5 class="app--staticCountry--title">{{country.country}}</h5>
+                  <p class="app--staticCountry--details">
+                    <span class="blue">{{country.cases | number}} cases</span> &
+                    <span class="red">{{country.deaths | number}} deaths</span>
+                  </p>
+                </div>
+              </div>
+            </a>
+          </div>
+        </perfect-scrollbar>
+      </div>
+    </div>
+  </div>
+  <div class="app--container">
+    <div class="app--scale">
+      <h4 class="app--header-title">Infections History</h4>
+      <div id="lineChart" style="width: 100%; height: 400px; overflow: hidden"></div>
+    </div>
+    <div class="app--diagram">
+      <h4 class="aheader-title">Infection Distribution By Countries</h4>
+      <div id="pieChart" style="width: 100%; height: 300px"></div>
+    </div>
+  </div>
+  <div class="app--container">
+    <div class="app--timer">
+      <h4>Outbreak Started</h4>
+      <app-timer></app-timer>
+    </div>
+    <div class="app--rates">
+      <h4 class="app--rates--title">Infection Rates</h4>
+      <div class="app--rates-box">
+        <div class="app--rate app--rate-green">
+          <div class="app--loading-footer" *ngIf="isLoading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <h2 *ngIf="!isLoading">
+            {{(totalRecoveries / finishedCases * 100) | number:'.1-2'}}%</h2>
+          <h5>Recovery Rate</h5>
+        </div>
+        <div class="app--rate app--rate-red">
+          <div class="app--loading-footer" *ngIf="isLoading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <h2 *ngIf="!isLoading">
+            {{(totalDeaths / finishedCases * 100) | number:'.1-2'}}%</h2>
+          <h5>Death Rate</h5>
+        </div>
+        <div class="app--rate app--rate-yellow">
+          <div class="app--loading-footer" *ngIf="isLoading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <h2 *ngIf="!isLoading">
+            {{(totalCritical / activeCases * 100) | number:'.1-2'}}%</h2>
+          <h5>Critical Rate</h5>
+        </div>
+        <div class="app--rate app--rate-blue">
+          <div class="app--loading-footer" *ngIf="isLoading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <div *ngIf="fuse">
+            <h2 *ngIf="!isLoading">{{fuse.list.length}}</h2>
+          </div>
+          <h5>Nations Affected</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

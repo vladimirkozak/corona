@@ -1,0 +1,33 @@
+@import '../dashboard/dashboard.component.scss';
+
+.app--count {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app--loading-md {
+    position: absolute;
+    font-size: 2.7em;
+    width: 100%;
+    height: 372px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.app--scale {
+    position: relative;
+}
+
+.app--title {
+    text-align: center;
+    color: #fff;
+}
+
+.app-timers {
+    width: 100%;
+    margin: 10px;
+    padding: 15px 25px;
+    background-color: #004042;;
+}

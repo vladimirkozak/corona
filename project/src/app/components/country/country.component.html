@@ -1,0 +1,116 @@
+<div class="app">
+  <h2 class="app--title" *ngIf="country">
+    <img width="100px" src="assets/flags/{{countryCodes[country.country].toLowerCase()}}.svg" alt="{{country.country}}">
+    {{country.country}}'s Statistics
+  </h2>
+  <div class="app--container">
+    <div class="app--box app--box-blue">
+      <h4 class="app--box--title">Infections</h4>
+      <div class="app--loading-sm" *ngIf="isLoading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div *ngIf="!isLoading">
+        <h2 class="app--box--number"> {{totalCases | number}} </h2>
+      </div>
+    </div>
+    <div class="app--box app--box-green">
+      <h4 class="header-title">Recoveries</h4>
+      <div class="app--loading-sm" *ngIf="isLoading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div *ngIf="!isLoading">
+        <h2 class="app--box--number"> {{totalRecoveries | number}} </h2>
+      </div>
+    </div>
+    <div class="app--box app--box-yellow">
+      <h4 class="header-title">Critical</h4>
+      <div class="app--loading-sm" *ngIf="isLoading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div *ngIf="!isLoading">
+        <h2 class="app--box--number"> {{totalCritical | number}} </h2>
+      </div>
+    </div>
+    <div class="app--box app--box-red">
+      <h4 class="app--box--title">Deaths</h4>
+      <div class="app--loading-sm" *ngIf="isLoading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div *ngIf="!isLoading">
+        <h2 class="app--box--number"> {{totalDeaths | number}} </h2>
+      </div>
+    </div>
+  </div>
+  <div class="app--container">
+    <div class="app--scale">
+      <h4 class="header-title">Infections History</h4>
+      <div class="app--loading-md" *ngIf="isLoading">
+        <i class="fas fa-circle-notch fa-spin"></i>
+      </div>
+      <div class="">
+        <div id="lineChart" style="width: 100%; height: 400px; overflow: hidden"></div>
+      </div>
+    </div>
+    <div class="app--diagram">
+      <h4 class="header-title" *ngIf="country">
+        {{country.country}}'s Infection Distribution
+      </h4>
+      <div class="">
+        <div id="pieChart" style="width: 100%; height: 300px"></div>
+      </div>
+    </div>
+  </div>
+  <div class="app--container">
+    <div class="app-timers">
+      <h4>Outbreak Started</h4>
+      <app-timer></app-timer>
+    </div>
+    <div class="app-timers">
+      <h4 class="header-title">{{country.country}}'s Infection Rates</h4>
+      <div class="app--rates-box">
+
+        <div class="app--rate app--rate-green">
+          <div class="app--loading-footer" *ngIf="isLoading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <h2 [class.d-none]="isLoading" class="">
+            <span
+              *ngIf="finishedCases>0 else naRecovery">{{(totalRecoveries / finishedCases * 100) | number:'.1-2'}}%</span>
+            <ng-template #naRecovery>
+
+            </ng-template>
+          </h2>
+          <h5>Recovery Rate</h5>
+        </div>
+        <div class="app--rate app--rate-red">
+          <div class="app--loading-footer" *ngIf="isLoading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <h2 *ngIf="!isLoading">
+            <span *ngIf="finishedCases>0 else naDeath">{{(totalDeaths / finishedCases * 100) | number:'.1-2'}}%</span>
+            <ng-template #naDeath>
+
+            </ng-template>
+          </h2>
+          <h5>Death Rate</h5>
+        </div>
+        <div class="app--rate app--rate-yellow">
+          <div class="app--loading-footer" *ngIf="isLoading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <h2 *ngIf="!isLoading">
+            {{(totalCritical / activeCases * 100) | number:'.1-2'}}%</h2>
+          <h5>Critical Rate</h5>
+        </div>
+        <div class="app--rate app--rate-blue">
+          <div class="app--loading-footer" *ngIf="isLoading">
+            <i class="fas fa-circle-notch fa-spin"></i>
+          </div>
+          <h2 *ngIf="!isLoading" class="">
+            {{(100-(totalCritical / activeCases * 100)) | number:'.1-2'}}%</h2>
+          <h5>Critical Rate</h5>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
