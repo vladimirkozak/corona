@@ -50,7 +50,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 	public todayCases: number;
 	public todayDeaths: number;
 	public activeCases: number;
-	public casesPer1M: number;
 	public finishedCases: number;
 	public sortType: string = 'todayCases';
 	public countryCodes: any = COUNTRY_CODES;
@@ -121,7 +120,6 @@ export class DashboardComponent implements OnInit, OnDestroy {
 					this.todayCases = this.calcSum('todayCases');
 					this.todayDeaths = this.calcSum('todayDeaths');
 					this.activeCases = this.calcSum('active');
-					this.casesPer1M = this.calcSum('casesPerOneMillion');
 					this.finishedCases = this.totalDeaths + this.totalRecoveries;
 					this.fuse = new Fuse(this.countries, {
 						shouldSort: true,

@@ -8,7 +8,7 @@ import { Component, OnInit } from '@angular/core';
 export class TimerComponent implements OnInit {
 
   public timer: any;
-  public oldDate: Date = new Date('2019-12-01');
+  public oldDate: Date = new Date('2019-12-08');
   public oneSecond: number = 1000;
   // tslint:disable-next-line: no-empty
   constructor() {}
