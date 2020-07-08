@@ -8,7 +8,7 @@
     <div *ngIf="!isLoading">
         <div class="app--news" *ngFor="let news of newsList; let i = index">
             <div class="app--news-img">
-                <img src="assets/img/add.jpg" alt="photo" style="height: 420px; width: 100%;">
+                <img src="assets/img/{{i}}.jpg" alt="photo" style="height: 420px; width: 100%;">
             </div>
             <div class="app--news-title">
                 {{ news.title }}
